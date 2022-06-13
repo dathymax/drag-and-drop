@@ -23,6 +23,7 @@ const Box = ({ id, left, top, hideSourceOnDrag, children }) => {
 	if (isDragging && hideSourceOnDrag) {
 		return <div ref={drag} />;
 	}
+
 	return (
 		<div
 			className="box"

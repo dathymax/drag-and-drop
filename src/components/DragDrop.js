@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import Box from "./Box";
 import { useDrop } from "react-dnd";
+import SideBar from "./SideBar";
+import InputElement from "./InputElement";
+import SelectElement from "./SelectElement";
 
 const boxList = [
 	{
 		id: 1,
-		box: <div>Box 1</div>,
+		title: "Input element",
+		element: <InputElement />,
 	},
 	{
 		id: 2,
-		box: <div>Box 2</div>,
-	},
-	{
-		id: 3,
-		box: <div>Box 3</div>,
+		title: "Select element",
+		element: <SelectElement />,
 	},
 ];
 
@@ -21,7 +21,7 @@ function DragDrop() {
 	const [board, setBoard] = useState([]);
 
 	const [{ isOver }, drop] = useDrop(() => ({
-		accept: "box",
+		accept: ["input", "select", "box"],
 		drop: (item) => addBox(item.id),
 		collect: (monitor) => ({
 			isOver: !!monitor.isOver(),
@@ -34,26 +34,20 @@ function DragDrop() {
 		setBoard((board) => [...board, listBox[0]]);
 	};
 
+	console.log("data", board);
+
 	return (
 		<>
-			<div className="pictures">
-				{boxList.map((box) => {
-					return (
-						<Box key={box.id} id={box.id}>
-							{box.box}
-						</Box>
-					);
-				})}
-			</div>
 			<div className="board" ref={drop}>
-				{board.map((box) => {
+				{/* {board.map((box) => {
 					return (
-						<Box key={box.id} id={box.id}>
-							{box.box}
-						</Box>
+						<div key={box.id} id={box.id}>
+							{box?.element}
+						</div>
 					);
-				})}
+				})} */}
 			</div>
+			<SideBar />
 		</>
 	);
 }
