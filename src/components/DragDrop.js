@@ -20,7 +20,7 @@ const boxList = [
 function DragDrop() {
 	const [board, setBoard] = useState([]);
 
-	const [{ isOver }, drop] = useDrop(() => ({
+	const [, drop] = useDrop(() => ({
 		accept: ["input", "select", "box"],
 		drop: (item) => addBox(item.id),
 		collect: (monitor) => ({
@@ -34,18 +34,16 @@ function DragDrop() {
 		setBoard((board) => [...board, listBox[0]]);
 	};
 
-	console.log("data", board);
-
 	return (
 		<>
 			<div className="board" ref={drop}>
-				{/* {board.map((box) => {
+				{board.map((box) => {
 					return (
 						<div key={box.id} id={box.id}>
 							{box?.element}
 						</div>
 					);
-				})} */}
+				})}
 			</div>
 			<SideBar />
 		</>
